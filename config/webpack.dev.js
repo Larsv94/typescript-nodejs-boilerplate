@@ -1,34 +1,21 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const NodemonPlugin = require("nodemon-webpack-plugin");
+const merge = require("webpack-merge");
+const common = require("./webpack.common.js");
 const webpack = require("webpack");
-const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
+const NodemonPlugin = require("nodemon-webpack-plugin");
+const path = require("path");
 const root = path.resolve(__dirname, "../");
 
-module.exports = {
+module.exports = merge(common, {
+  mode: "development",
   entry: ["webpack/hot/poll?100", "./src/index.ts"],
-  watch: true,
-  target: "node",
+  devtool: "eval-cheap-module-source-map",
   externals: [
     nodeExternals({
       allowlist: ["webpack/hot/poll?100"],
     }),
   ],
-  module: {
-    rules: [
-      {
-        test: /.ts$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  mode: "development",
-  resolve: {
-    extensions: [".ts", ".ts", ".js"],
-  },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin({ quite: true }),
@@ -38,8 +25,4 @@ module.exports = {
       verbose: false,
     }),
   ],
-  output: {
-    path: path.join(root, "dist"),
-    filename: "index.js",
-  },
-};
+});
