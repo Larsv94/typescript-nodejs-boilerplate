@@ -18,12 +18,6 @@ app.use(helmet());
 app.use(cors());
 
 app.use((req, res, next) => {
-  const thickMap = [
-    [1, 2],
-    [1, 2],
-    [1, 2],
-  ];
-  const thinMap = thickMap?.flatMap((x) => x[1]);
   res.send("<h1>Hello World 😊😊😊😊</h1>");
 });
 
