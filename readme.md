@@ -13,7 +13,7 @@ Features:
 Start by cloning this repository
 
 ```shell
-git clone https://github.com/Larsv94/typescript-nodejs-boilerplate.git --depth 0
+git clone https://github.com/Larsv94/typescript-nodejs-boilerplate.git --depth 1
 ```
 
 Install required dev dependencies
